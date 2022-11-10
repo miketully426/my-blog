@@ -1,24 +1,15 @@
 package org.launchcode.myblog.data;
 
 import org.launchcode.myblog.models.Blog;
+import org.springframework.data.repository.CrudRepository;
+import org.springframework.stereotype.Repository;
 
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
-public class BlogData {
+@Repository
+public interface BlogData extends CrudRepository<Blog, Integer> {
 
-    private static final Map<Integer, Blog> blogs = new HashMap<>();
 
-    public static Collection<Blog> getAll(){
-        return blogs.values();
-    }
-
-    public static Blog getById(int id){
-        return blogs.get(id);
-    }
-
-    public static void add(Blog blog){
-        blogs.put(blog.getId(), blog);
-    }
 }

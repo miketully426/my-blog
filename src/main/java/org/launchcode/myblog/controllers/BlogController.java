@@ -3,6 +3,7 @@ package org.launchcode.myblog.controllers;
 import org.launchcode.myblog.data.BlogData;
 import org.launchcode.myblog.models.Blog;
 import org.launchcode.myblog.models.Status;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
@@ -17,13 +18,13 @@ import java.util.Map;
 @RequestMapping("blog")
 public class BlogController {
 
+    @Autowired
+    private BlogData blogData;
+
     @GetMapping("")
     public String viewEntries(Model model){
         model.addAttribute("title", "Mike's Blog");
-        model.addAttribute("entries", BlogData.getAll());
-        for(Blog blog: BlogData.getAll()){
-            System.out.println(blog.getStatus());
-        }
+        model.addAttribute("entries", blogData.findAll());
         return "blog/viewBlog";
     }
 
@@ -42,7 +43,7 @@ public class BlogController {
             return "blog/newPost";
         }
         newBlog.setDate(LocalDate.now());
-        BlogData.add(newBlog);
+        blogData.save(newBlog);
         return "redirect:";
     }
 }

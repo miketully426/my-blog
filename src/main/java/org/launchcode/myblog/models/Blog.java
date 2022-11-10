@@ -1,23 +1,25 @@
 package org.launchcode.myblog.models;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 import javax.validation.constraints.NotBlank;
 import java.time.LocalDate;
 
+@Entity
 public class Blog {
 
+    @Id
+    @GeneratedValue
     private int id;
-    private static int nextId = 1;
-
     @NotBlank(message="Must have a title!")
     private String title;
+
+    @Column(columnDefinition = "TEXT")
     private String content;
     private LocalDate date;
     private Status status;
-
-    public Blog() {
-        this.id = nextId;
-        nextId++;
-    }
 
     public String getTitle() {
         return title;

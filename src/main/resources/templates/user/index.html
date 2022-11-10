@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<head>
+    <meta charset="UTF-8"/>
+    <title th:text="${title}"></title>
+</head>
+<body>
+<header th:replace="fragments :: navBar"></header>
+<ul>
+<th:block th:each="user: ${users}">
+    <strong><li th:text="${user.username}"></li></strong>
+</th:block>
+</ul>
+<form method="post">
+    <label>
+        Add new user:
+        <input type="text" th:field="${newUser.username}">
+    </label>
+    <p class='error' th:errors="${newUser.username}"></p>
+    <button>Submit</button>
+</form>
+</body>
+</html>

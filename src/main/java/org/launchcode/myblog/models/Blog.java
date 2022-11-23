@@ -4,6 +4,8 @@ import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 public class Blog {
@@ -18,10 +20,13 @@ public class Blog {
     private String content;
     private LocalDate date;
     private Status status;
-    //Add user field and getter/setter
+
     @ManyToOne
     @NotNull(message="You must select a user!")
     private User user;
+
+    @ManyToMany
+    private List<Tag> tags = new ArrayList<>();
 
     public String getTitle() {
         return title;
@@ -65,5 +70,13 @@ public class Blog {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    public List<Tag> getTags() {
+        return tags;
+    }
+
+    public void setTags(List<Tag> tags) {
+        this.tags = tags;
     }
 }
